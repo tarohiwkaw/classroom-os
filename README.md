@@ -16,19 +16,9 @@ Users cannot self-select Admin/Owner. The UI choice controls the workflow; Supab
 
 ## Supabase
 
-Run the core migration once, then run, in order:
+Run the core migration once, then run:
 
-1. `supabase/migrations/20260915_classroom_os_v3_onboarding.sql`
-2. `supabase/migrations/20260915_classroom_os_v4_state_fix.sql`
-
-Migration 4 fixes a critical bug: `classroom_os_state` (the shared classroom
-snapshot almost every module writes through) previously only accepted
-writes from `owner`/`admin`, so every other role's actions — a teacher
-creating an exam, a student checking off attendance, a moderator posting
-in Community — never made it past their own browser. It's now writable by
-any active member, with a trigger that still keeps classroom identity and
-feature flags owner/admin-only inside that shared blob. See `CHANGELOG.md`
-for the full list of what changed and what's still worth doing next.
+`supabase/migrations/20260915_classroom_os_v3_onboarding.sql`
 
 Set Vercel environment variables:
 
