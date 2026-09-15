@@ -1,41 +1,13 @@
-# CLASSROOM OS — V1 Complete Build
+# CLASSROOM OS V3 — REAL SYSTEM
 
-A bright editorial classroom operating system designed around an empty-first classroom: admins populate real class data; students consume and contribute.
+Production-oriented classroom app: Supabase Auth, Owner/Admin/Student roles, classroom creation/join code, real database CRUD, private class files and gallery storage, community, academic management, duty, weekly, finance, attendance, feature controls, and responsive editorial UI.
 
-## Included UX
-- Student + Owner/Admin login flows
-- Supabase Auth when env vars exist; safe local demo mode when they do not
-- Empty-first Home, Schedule, Subjects, Tasks, Exams, Calendar
-- Events, Announcements, Duty Wall, Weekly editorial
-- Community channels + chat
-- Study Rooms + focus timer
-- Class Files with upload/download flow and private Supabase Storage support
-- Class Moments gallery with image URL decoration
-- Class Fund
-- Attendance session / QR foundation
-- Members & multi-role UI
-- Class Pulse analytics from real local state
-- Activity Logs
-- Admin Control Center, Setup Checklist, Feature Control, Settings
-- Themes: sage / sand / sky / lavender / terracotta
-- Optional Classroom Humor Mode: off / friendly / chaos
-- Responsive desktop / iPad / mobile layout
+## One-time setup
+1. Copy `.env.example` to `.env.local` for local development, or add the same variables to Vercel:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+2. In Supabase SQL Editor, run your existing CLASSROOM OS core schema first, then run the incremental migration in `supabase/migrations/20260915_classroom_os_join.sql`.
+3. Deploy. No service-role key belongs in the browser.
 
-## Run
-npm install
-npm run dev
-
-## Verify build
-npm run build
-
-## Supabase
-Copy `.env.example` to `.env` and set:
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-
-Run `supabase/migrations/20260915_classroom_os_core.sql` once for the dedicated CLASSROOM OS schema. It intentionally uses `classroom_os_*` table names so existing DISCIPLINE tables are not overwritten.
-
-For production, use Supabase Auth + RLS. Never put a service-role key in the browser. The local demo login is for UI testing only and is not a security boundary.
-
-## Admin bootstrap
-After the first real Supabase account is created, an existing owner/admin should assign the account to a classroom in `classroom_os_members` with roles such as `owner` or `admin`. Do not make all users admins.
+## Important
+The app starts empty. Owner/Admin enters classroom data from the UI. Students join with a Class Code. Files use private Supabase Storage buckets.
