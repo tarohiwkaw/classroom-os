@@ -1,10 +1,13 @@
-# ONE-TIME DEPLOY
+# Deploy CLASSROOM OS V3
 
-1. Extract this folder into the `classroom-os` repo.
-2. Commit and push once.
-3. Vercel will build from `main`.
-4. Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to Vercel.
-5. Run the SQL migration in `supabase/migrations/20260915_classroom_os_core.sql` if you want the dedicated cloud schema and private file buckets.
-6. Never expose a Supabase service-role key in Vite/client code.
+1. Replace the project in Working Copy with this V3 package.
+2. Commit: `feat: redesign V3 identity-first onboarding`
+3. Push `main`.
+4. Vercel builds automatically.
+5. Confirm Vercel env vars: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
+6. Supabase → Authentication → URL Configuration → Site URL = production Vercel URL.
+7. Run the V3 onboarding SQL migration once.
 
-The UI starts empty. Admin populates class data from the web instead of editing source code.
+### Test order
+
+Account → email confirmation → sign in → Create Classroom → verify Owner → open Members & Roles → join from a second account with Class Code → verify Student → Owner assigns Teacher/Admin → verify the second account sees the correct role.
