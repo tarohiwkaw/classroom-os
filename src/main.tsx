@@ -14,9 +14,10 @@ const now=()=>new Date().toISOString();
 const seed={
  classroom:{name:'',program:'',year:'',code:'',description:'',theme:'sage',humor:'off'},
  members:[] as Row[],subjects:[] as Row[],schedules:[] as Row[],tasks:[] as Row[],exams:[] as Row[],events:[] as Row[],announcements:[] as Row[],duties:[] as Row[],weekly:[] as Row[],channels:[] as Row[],messages:[] as Row[],rooms:[] as Row[],transactions:[] as Row[],attendance:[] as Row[],files:[] as Row[],gallery:[] as Row[],activity:[] as Row[],
- features:{Home:true,Schedule:true,Tasks:true,Exams:true,Calendar:true,Events:true,Duty:true,Weekly:true,Community:true,'Study Rooms':true,'Class Files':true,Gallery:true,'Class Fund':false,Attendance:false,'Class Pulse':true}
+ features:{Home:true,Schedule:true,Tasks:true,Exams:true,Calendar:true,Events:true,Duty:true,Weekly:true,Community:true,'Study Rooms':true,'Class Files':true,Gallery:true,'Class Fund':false,Attendance:false,'Class Pulse':true} as FeatureFlags
 };
-type Store=typeof seed;
+type FeatureFlags = Record<Page, boolean>;
+type Store=Omit<typeof seed,'features'> & {features: FeatureFlags};
 const load=():Store=>{try{const raw=localStorage.getItem('classroom-os-v1');return raw?JSON.parse(raw):structuredClone(seed)}catch{return structuredClone(seed)}};
 const save=(s:Store)=>localStorage.setItem('classroom-os-v1',JSON.stringify(s));
 
